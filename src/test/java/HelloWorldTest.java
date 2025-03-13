@@ -22,12 +22,12 @@ public class HelloWorldTest {
         Response response = RestAssured
                 .given()
                 .redirects()
-                .follow(true)
+                .follow(false)
                 .get("https://playground.learnqa.ru/api/long_redirect")
                 .andReturn();
 
-        Headers responceHeaders = response.getHeaders();
-        Header siteHeader = responceHeaders.get("x-host");
+        Headers responseHeaders = response.getHeaders();
+        Header siteHeader = responseHeaders.get("Location");
         String value = siteHeader.getValue();
         System.out.println(value);
     }
