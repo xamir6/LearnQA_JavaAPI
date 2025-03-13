@@ -31,4 +31,26 @@ public class HelloWorldTest {
         String value = siteHeader.getValue();
         System.out.println(value);
     }
+
+    @Test
+    public void longAllRedirectsTest() {
+        String currentUrl = "https://playground.learnqa.ru/api/long_redirect";
+
+        while (true) {
+            Response response = RestAssured
+                    .given()
+                    .redirects()
+                    .follow(false)
+                    .get(currentUrl)
+                    .andReturn();
+
+            if (response.getStatusCode() != 200) {
+                currentUrl = response.getHeader("Location");
+                System.out.println(currentUrl);
+            } else
+                break;
+        }
+    }
 }
+
+
