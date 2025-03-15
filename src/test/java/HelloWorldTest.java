@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class HelloWorldTest {
     @Test
-    public void JsonParsingTest() {
+    public void jsonParsingTest() {
         JsonPath response = RestAssured
                 .given()
                 .get("https://playground.learnqa.ru/api/get_json_homework")
@@ -49,6 +49,38 @@ public class HelloWorldTest {
                 System.out.println(currentUrl);
             } else
                 break;
+        }
+    }
+
+    @Test
+    public void longtimeJobTest() throws InterruptedException {
+        String url = "https://playground.learnqa.ru/ajax/api/longtime_job";
+
+        JsonPath response = RestAssured
+                .given()
+                .get(url)
+                .jsonPath();
+
+        String tokenValue = response.get("token");
+        int secondsValue = response.get("seconds");
+
+        JsonPath responseBeforeTaskReady = RestAssured
+                .given()
+                .queryParam("token", tokenValue)
+                .get(url)
+                .jsonPath();
+
+        if ("Job is NOT ready".equals(responseBeforeTaskReady.get("status"))) {
+            Thread.sleep((secondsValue + 1) * 1000L);
+            JsonPath responseAfterTaskReady = RestAssured
+                    .given()
+                    .queryParam("token", tokenValue)
+                    .get(url)
+                    .jsonPath();
+
+            if ("Job is ready".equals(responseAfterTaskReady.get("status")) && (responseAfterTaskReady.get("result") != null)) {
+                System.out.println("We got it");
+            }
         }
     }
 }
