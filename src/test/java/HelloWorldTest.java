@@ -136,5 +136,18 @@ public class HelloWorldTest {
             assertEquals(expectedTextMinLength + 1, hello.length(), "Text length less that 15 letters.");
         }
     }
+
+    @Test
+    public void responseCookieKeyAndValueTest() {
+        Response response = RestAssured
+                .get("https://playground.learnqa.ru/api/homework_cookie")
+                .andReturn();
+
+        String responseKeyCookie = response.getCookies().keySet().iterator().next();
+        String responseValueCookie = response.getCookie(responseKeyCookie);
+
+        assertEquals("HomeWork", responseKeyCookie, "The cookie key is incorrect");
+        assertEquals("hw_value", responseValueCookie, "The cookie value is incorrect");
+    }
 }
 
