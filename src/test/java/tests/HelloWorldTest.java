@@ -1,3 +1,5 @@
+package tests;
+
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
