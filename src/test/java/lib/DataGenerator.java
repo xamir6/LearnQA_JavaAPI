@@ -3,11 +3,23 @@ package lib;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class DataGenerator {
     public static String getRandomEmail() {
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
         return "learnqa" + timestamp + "@example.com";
+    }
+
+    public static String getLongUsername() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < 251; i++) {
+            char randomChar = (char) ('a' + random.nextInt(26));
+            sb.append(randomChar);
+        }
+        return sb.toString();
     }
 
     public static Map<String, String> getRegistrationData() {
