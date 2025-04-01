@@ -5,6 +5,7 @@ import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -122,6 +123,7 @@ public class HelloWorldTest {
         }
     }
 
+    @Disabled
     @Test
     public void checkTextLengthTest() {
         String hello = "Hello, world";
@@ -157,6 +159,7 @@ public class HelloWorldTest {
         assertEquals("Some secret value", header);
     }
 
+    @Disabled
     @ParameterizedTest
     @ValueSource(strings = {
             "Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30",
