@@ -38,12 +38,48 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+    @Step("Make a GET-request without data")
+    public Response makeGetRequestWithoutData(String url) {
+        return given()
+                .filter(new AllureRestAssured())
+                .get(url)
+                .andReturn();
+    }
+
     @Step("Make a POST-request")
     public Response makePostRequest(String url, Map<String, String> authData) {
         return given()
                 .filter(new AllureRestAssured())
                 .body(authData)
                 .post(url)
+                .andReturn();
+    }
+
+    @Step("Make a POST-request without data")
+    public Response makePostRequestWithoutData(String url) {
+        return given()
+                .filter(new AllureRestAssured())
+                .post(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT-request")
+    public Response makePutRequest(String url, String token, String cookie, Map<String, String> editData) {
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header("x-csrf-token", token))
+                .cookie("auth_sid", cookie)
+                .body(editData)
+                .put(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT-request without header and cookie")
+    public Response makePutRequestWithoutHeaderAndCookie(String url, Map<String, String> editData) {
+        return given()
+                .filter(new AllureRestAssured())
+                .body(editData)
+                .put(url)
                 .andReturn();
     }
 }

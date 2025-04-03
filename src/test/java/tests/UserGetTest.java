@@ -37,9 +37,9 @@ public class UserGetTest extends BaseTestCase {
                 .andReturn();
 
         Assertions.assertResponseHasField(responseUserData, "username");
-        Assertions.assertJsonHasNotFields(responseUserData, "firstName");
-        Assertions.assertJsonHasNotFields(responseUserData, "lastName");
-        Assertions.assertJsonHasNotFields(responseUserData, "email");
+        Assertions.assertJsonHasNotField(responseUserData, "firstName");
+        Assertions.assertJsonHasNotField(responseUserData, "lastName");
+        Assertions.assertJsonHasNotField(responseUserData, "email");
     }
 
     @Test
@@ -65,8 +65,8 @@ public class UserGetTest extends BaseTestCase {
                 );
 
         Assertions.assertResponseHasField(responseUserData, "username");
-        Assertions.assertJsonHasNotFields(responseUserData, "firstName");
-        Assertions.assertJsonHasNotFields(responseUserData, "lastName");
-        Assertions.assertJsonHasNotFields(responseUserData, "email");
+        Assertions.assertJsonHasNotField(responseUserData, "firstName");
+        Assertions.assertJsonHasNotField(responseUserData, "lastName");
+        Assertions.assertJsonHasNotField(responseUserData, "email");
     }
 }
