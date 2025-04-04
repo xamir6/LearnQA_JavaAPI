@@ -14,7 +14,7 @@ import java.util.Map;
 public class UserEditTest extends BaseTestCase {
     String cookie;
     String header;
-    String userId;
+    int userId;
     Map<String, String> userData = new HashMap<>();
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
@@ -26,7 +26,7 @@ public class UserEditTest extends BaseTestCase {
         Response responseCreateAuth = apiCoreRequests
                 .makePostRequest("https://playground.learnqa.ru/api/user/", this.userData);
 
-        this.userId = responseCreateAuth.jsonPath().getString("id");
+        this.userId = getIntFromJson(responseCreateAuth, "id");
 
         // LOGIN
         Map<String, String> authData = new HashMap<>();
