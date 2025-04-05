@@ -90,7 +90,7 @@ public class UserDeleteTest extends BaseTestCase {
 
         //DELETE
         Response responseDeleteUser = apiCoreRequests
-                .makeDeleteRequest("https://playground.learnqa.ru/api/user/" + userIdOnCreate, this.header, this.cookie);
+                .makeDeleteRequest("https://playground.learnqa.ru/api/user/" + this.userIdOnAuth, this.header, this.cookie);
 
         Assertions.assertResponseCodeEquals(responseDeleteUser, 400);
         Assertions.assertResponseTextEquals(
