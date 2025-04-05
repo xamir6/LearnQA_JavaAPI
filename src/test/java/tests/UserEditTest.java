@@ -24,7 +24,7 @@ public class UserEditTest extends BaseTestCase {
         this.userData = DataGenerator.getRegistrationData();
 
         Response responseCreateAuth = apiCoreRequests
-                .makePostRequest("https://playground.learnqa.ru/api/user/", this.userData);
+                .makePostRequest(url + "user/", this.userData);
 
         this.userId = getIntFromJson(responseCreateAuth, "id");
 
@@ -34,7 +34,7 @@ public class UserEditTest extends BaseTestCase {
         authData.put("password", this.userData.get("password"));
 
         Response responseGetAuth = apiCoreRequests
-                .makePostRequest("https://playground.learnqa.ru/api/user/login", authData);
+                .makePostRequest(url + "user/login", authData);
 
         this.cookie = getCookie(responseGetAuth, "auth_sid");
         this.header = getHeader(responseGetAuth, "x-csrf-token");
@@ -49,7 +49,7 @@ public class UserEditTest extends BaseTestCase {
 
         Response responseEditUser = apiCoreRequests
                 .makePutRequest(
-                        "https://playground.learnqa.ru/api/user/" + this.userId,
+                        url + "user/" + this.userId,
                         this.header,
                         this.cookie,
                         editData
@@ -58,7 +58,7 @@ public class UserEditTest extends BaseTestCase {
         //GET
         Response responseUserData = apiCoreRequests
                 .makeGetRequest(
-                        "https://playground.learnqa.ru/api/user/" + this.userId,
+                        url + "user/" + this.userId,
                         this.header,
                         this.cookie
                 );
@@ -74,13 +74,13 @@ public class UserEditTest extends BaseTestCase {
 
         Response responseEditUser = apiCoreRequests
                 .makePutRequestWithoutHeaderAndCookie(
-                        "https://playground.learnqa.ru/api/user/" + this.userId,
+                        url + "user/" + this.userId,
                         editData
                 );
 
         //GET
         Response responseUserData = apiCoreRequests
-                .makeGetRequestWithoutData("https://playground.learnqa.ru/api/user/" + this.userId);
+                .makeGetRequestWithoutData(url + "user/" + this.userId);
 
         String[] notExpectedFields = {"id", "email", "firstName", "lastName"};
         Assertions.assertResponseHasField(responseUserData, "username");
@@ -95,7 +95,7 @@ public class UserEditTest extends BaseTestCase {
 
         Response responseEditUser = apiCoreRequests
                 .makePutRequest(
-                        "https://playground.learnqa.ru/api/user/" + 3,
+                        url + "user/" + 3,
                         this.header,
                         this.cookie,
                         editData
@@ -104,7 +104,7 @@ public class UserEditTest extends BaseTestCase {
         //GET
         Response responseUserData = apiCoreRequests
                 .makeGetRequest(
-                        "https://playground.learnqa.ru/api/user/" + 3,
+                        url + "user/" + 3,
                         this.header,
                         this.cookie
                 );
@@ -122,7 +122,7 @@ public class UserEditTest extends BaseTestCase {
 
         Response responseEditUser = apiCoreRequests
                 .makePutRequest(
-                        "https://playground.learnqa.ru/api/user/" + this.userId,
+                        url + "user/" + this.userId,
                         this.header,
                         this.cookie,
                         editData
@@ -131,7 +131,7 @@ public class UserEditTest extends BaseTestCase {
         //GET
         Response responseUserData = apiCoreRequests
                 .makeGetRequest(
-                        "https://playground.learnqa.ru/api/user/" + this.userId,
+                        url + "user/" + this.userId,
                         this.header,
                         this.cookie
                 );
@@ -148,7 +148,7 @@ public class UserEditTest extends BaseTestCase {
 
         Response responseEditUser = apiCoreRequests
                 .makePutRequest(
-                        "https://playground.learnqa.ru/api/user/" + this.userId,
+                        url + "user/" + this.userId,
                         this.header,
                         this.cookie,
                         editData
@@ -157,7 +157,7 @@ public class UserEditTest extends BaseTestCase {
         //GET
         Response responseUserData = apiCoreRequests
                 .makeGetRequest(
-                        "https://playground.learnqa.ru/api/user/" + this.userId,
+                        url + "user/" + this.userId,
                         this.header,
                         this.cookie
                 );

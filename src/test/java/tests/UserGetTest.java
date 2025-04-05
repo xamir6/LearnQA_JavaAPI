@@ -23,7 +23,7 @@ public class UserGetTest extends BaseTestCase {
         authData.put("password", "1234");
 
         Response responseGetAuth = apiCoreRequests
-                .makePostRequest("https://playground.learnqa.ru/api/user/login", authData);
+                .makePostRequest(url+"user/login", authData);
 
         this.cookie = getCookie(responseGetAuth, "auth_sid");
         this.header = getHeader(responseGetAuth, "x-csrf-token");
@@ -33,7 +33,7 @@ public class UserGetTest extends BaseTestCase {
     @Test
     public void getUserDataNotAuthTest() {
         Response responseUserData = RestAssured
-                .get("https://playground.learnqa.ru/api/user/2")
+                .get(url + "user/2")
                 .andReturn();
 
         Assertions.assertResponseHasField(responseUserData, "username");
@@ -46,7 +46,7 @@ public class UserGetTest extends BaseTestCase {
     public void getUserDetailsAuthAsSameUserTest() {
         Response responseUserData = apiCoreRequests
                 .makeGetRequest(
-                        "https://playground.learnqa.ru/api/user/2",
+                        url + "user/2",
                         this.header,
                         this.cookie
                 );
@@ -59,7 +59,7 @@ public class UserGetTest extends BaseTestCase {
     public void getUserDetailsOfOtherUserTest() {
         Response responseUserData = apiCoreRequests
                 .makeGetRequest(
-                        "https://playground.learnqa.ru/api/user/3",
+                        url + "user/3",
                         this.header,
                         this.cookie
                 );
