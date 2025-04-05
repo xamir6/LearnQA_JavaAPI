@@ -23,7 +23,7 @@ public class UserGetTest extends BaseTestCase {
         authData.put("password", "1234");
 
         Response responseGetAuth = apiCoreRequests
-                .makePostRequest(url+"user/login", authData);
+                .makePostRequest(url + "user/login", authData);
 
         this.cookie = getCookie(responseGetAuth, "auth_sid");
         this.header = getHeader(responseGetAuth, "x-csrf-token");
