@@ -6,11 +6,13 @@ import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Tag("Some service name")
 public class UserDeleteTest extends BaseTestCase {
     String header;
     String cookie;

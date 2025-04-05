@@ -5,12 +5,14 @@ import io.restassured.response.Response;
 import lib.Assertions;
 import lib.BaseTestCase;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import lib.ApiCoreRequests;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Tag("Some service name")
 public class UserGetTest extends BaseTestCase {
     String header;
     String cookie;

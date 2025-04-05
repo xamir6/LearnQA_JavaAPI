@@ -7,6 +7,7 @@ import lib.Assertions;
 import lib.ApiCoreRequests;
 import lib.BaseTestCase;
 import lib.DataGenerator;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,6 +15,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.HashMap;
 import java.util.Map;
 
+@Tag("Some service name")
 public class UserRegisterTest extends BaseTestCase {
     Map<String, String> userData = new HashMap<>();
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
